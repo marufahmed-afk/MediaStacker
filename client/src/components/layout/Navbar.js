@@ -18,7 +18,7 @@ const Navbar = ({ title }) => {
           className="ham"
           onClick={toggleNav}
         />
-        <div className={`nav-list ${isOpen ? " close-nav " : " "}`}>
+        <div className={`nav-list ${isOpen ? " toggle-nav " : " "}`}>
           <img
             src={require("../../images/back-arrow.svg")}
             alt=""

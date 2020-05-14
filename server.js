@@ -22,5 +22,5 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("samira modon");
+  res.send("test get request");
 });
