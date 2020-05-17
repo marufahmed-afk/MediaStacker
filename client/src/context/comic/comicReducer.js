@@ -13,6 +13,18 @@ export default (state, action) => {
         ...state,
         comics: [...state.comics, action.payload],
       };
+    case UPDATE_COMIC:
+      return {
+        ...state,
+        comics: state.comics.map((comic) =>
+          comic.id === action.payload.id ? action.payload : comic
+        ),
+      };
+    case DELETE_COMIC:
+      return {
+        ...state,
+        comics: state.comics.filter((comic) => comic.id !== action.payload),
+      };
     case SET_CURRENT:
       return {
         ...state,

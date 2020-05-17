@@ -1,19 +1,36 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import ComicContext from "../../context/comic/comicContext";
 
-const ComicForm = () => {
+const ComicForm = ({ isOpen, toggleForm }) => {
   const comicContext = useContext(ComicContext);
 
-  const { addComic } = comicContext;
+  const {
+    addComic,
+    current,
+    clearCurrent,
+    deleteComic,
+    updateComic,
+  } = comicContext;
 
-  const [isOpen, setOpen] = useState(false);
+  useEffect(() => {
+    if (current != null) {
+      setComic(current);
+    } else {
+      setComic({
+        name: "",
+        url: "",
+        read: false,
+      });
+    }
+  }, [comicContext, current]);
+
   const [comic, setComic] = useState({
     name: "",
     url: "",
     read: false,
   });
 
-  const { name, url, read } = comic;
+  const { id, name, url, read } = comic;
 
   const handleChange = (e) =>
     setComic({ ...comic, [e.target.name]: e.target.value });
@@ -24,18 +41,23 @@ const ComicForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addComic(comic);
-    setComic({
-      name: "",
-      url: "",
-      read: false,
-    });
+    if (current === null) {
+      addComic(comic);
+    } else {
+      updateComic(comic);
+    }
+    clearCurrent();
   };
 
-  const toggleForm = () => {
-    console.log("hello there");
-    setOpen(!isOpen);
+  const handleDelete = (e) => {
+    deleteComic(id);
+    clearCurrent();
   };
+
+  // const toggleForm = () => {
+  //   console.log("hello there");
+  //   setOpen(!isOpen);
+  // };
 
   return (
     <Fragment>
@@ -51,14 +73,26 @@ const ComicForm = () => {
               type="checkbox"
               name="read"
               value={read}
+              checked={read}
               onChange={handleCheck}
             />
             <span className="checkmark"></span>
           </label>
 
           <div className="submit-btns">
-            <input type="submit" value="Add" className="add-form-btn" />
-            <input type="submit" value="Delete" className="delete-form-btn" />
+            <input
+              type="submit"
+              value={current ? "Edit" : "Add"}
+              className="add-form-btn"
+            />
+            {current && (
+              <input
+                type="submit"
+                value="Delete"
+                className="delete-form-btn"
+                onClick={handleDelete}
+              />
+            )}
           </div>
         </form>
 
@@ -66,7 +100,11 @@ const ComicForm = () => {
           src={require("../../images/close-btn.svg")}
           alt=""
           className="close-btn"
-          onClick={toggleForm}
+          onClick={() => {
+            toggleForm();
+            //calling clearcurrent to switch from edit form to add form
+            clearCurrent();
+          }}
         />
       </div>
 
@@ -74,7 +112,11 @@ const ComicForm = () => {
         src={require("../../images/add-btn.svg")}
         alt=""
         className="add-btn"
-        onClick={toggleForm}
+        onClick={() => {
+          toggleForm();
+          //calling clearcurrent to switch from edit form to add form
+          clearCurrent();
+        }}
       />
     </Fragment>
   );

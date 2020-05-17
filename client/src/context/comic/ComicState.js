@@ -49,6 +49,9 @@ const ComicState = (props) => {
     dispatch({ type: ADD_COMIC, payload: comic });
   };
   //Delete Comic
+  const deleteComic = (id) => {
+    dispatch({ type: DELETE_COMIC, payload: id });
+  };
 
   //Set Current Comic
   const setCurrent = (comic) => {
@@ -61,12 +64,18 @@ const ComicState = (props) => {
   };
 
   //Update Comic
+  const updateComic = (comic) => {
+    dispatch({ type: UPDATE_COMIC, payload: comic });
+  };
 
   return (
     <ComicContext.Provider
       value={{
         comics: state.comics,
+        current: state.current,
         addComic,
+        deleteComic,
+        updateComic,
         setCurrent,
         clearCurrent,
       }}

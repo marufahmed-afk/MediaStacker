@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import ComicContext from "../../context/comic/comicContext";
 
-//trying stuff
-import ComicForm from "../comics/ComicForm";
+const ComicItem = ({ comic, isOpen, setOpen }) => {
+  const comicContext = useContext(ComicContext);
 
-const ComicItem = ({ comic }) => {
-  const { toggleForm } = ComicForm;
+  const { setCurrent } = comicContext;
+
+  const toggleForm = () => {
+    console.log("hello there from comic Item");
+    setCurrent(comic);
+    setOpen(!isOpen);
+  };
 
   return (
     <div className="card">
