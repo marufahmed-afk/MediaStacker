@@ -210,3 +210,19 @@ body {
 .delete-form-btn {
   background-color: var(--nav-bg-color);
 }
+
+.filter-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4.5em;
+}
+
+.filter-media input {
+  width: 33%;
+  border-radius: 10px;
+  padding: 1.2em 1.5em;
+  border: none;
+  outline: none;
+  font-size: 1.3em;
+}

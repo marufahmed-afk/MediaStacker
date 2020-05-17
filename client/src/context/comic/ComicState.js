@@ -8,6 +8,8 @@ import {
   UPDATE_COMIC,
   SET_CURRENT,
   CLEAR_CURRENT,
+  FILTER_MEDIA,
+  CLEAR_FILTER,
 } from "../types";
 
 const ComicState = (props) => {
@@ -21,7 +23,7 @@ const ComicState = (props) => {
       },
       {
         id: 2,
-        name: "Catwoman Returns",
+        name: "Catwoman paradox",
         url: "catwoman.com",
         read: true,
       },
@@ -68,16 +70,29 @@ const ComicState = (props) => {
     dispatch({ type: UPDATE_COMIC, payload: comic });
   };
 
+  //Filter Comic
+  const filterMedia = (text) => {
+    dispatch({ type: FILTER_MEDIA, payload: text });
+  };
+
+  //Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
+
   return (
     <ComicContext.Provider
       value={{
         comics: state.comics,
         current: state.current,
+        filtered: state.filtered,
         addComic,
         deleteComic,
         updateComic,
         setCurrent,
         clearCurrent,
+        filterMedia,
+        clearFilter,
       }}
     >
       {props.children}

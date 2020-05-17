@@ -4,6 +4,8 @@ import {
   UPDATE_COMIC,
   SET_CURRENT,
   CLEAR_CURRENT,
+  FILTER_MEDIA,
+  CLEAR_FILTER,
 } from "../types";
 
 export default (state, action) => {
@@ -35,6 +37,20 @@ export default (state, action) => {
         ...state,
         current: null,
       };
+    case FILTER_MEDIA:
+      return {
+        ...state,
+        filtered: state.comics.filter((comic) => {
+          const regex = new RegExp(`${action.payload}`, "gi");
+          return comic.name.match(regex);
+        }),
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
+      };
+
     default:
       return state;
   }
