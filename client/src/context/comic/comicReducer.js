@@ -6,6 +6,7 @@ import {
   CLEAR_CURRENT,
   FILTER_MEDIA,
   CLEAR_FILTER,
+  GET_COMICS,
 } from "../types";
 
 export default (state, action) => {
@@ -26,6 +27,11 @@ export default (state, action) => {
       return {
         ...state,
         comics: state.comics.filter((comic) => comic.id !== action.payload),
+      };
+    case GET_COMICS:
+      return {
+        ...state,
+        comics: action.payload,
       };
     case SET_CURRENT:
       return {

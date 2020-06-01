@@ -34,7 +34,7 @@ const Comics = () => {
                 comic.read ? (
                   <ComicItem
                     comic={comic}
-                    key={comic.id}
+                    key={comic._id}
                     isOpen={isOpen}
                     setOpen={setOpen}
                   />
@@ -46,7 +46,7 @@ const Comics = () => {
                 comic.read ? (
                   <ComicItem
                     comic={comic}
-                    key={comic.id}
+                    key={comic._id}
                     isOpen={isOpen}
                     setOpen={setOpen}
                   />
@@ -65,7 +65,7 @@ const Comics = () => {
                 ) : (
                   <ComicItem
                     comic={comic}
-                    key={comic.id}
+                    key={comic._id}
                     isOpen={isOpen}
                     setOpen={setOpen}
                   />
@@ -77,7 +77,7 @@ const Comics = () => {
                 ) : (
                   <ComicItem
                     comic={comic}
-                    key={comic.id}
+                    key={comic._id}
                     isOpen={isOpen}
                     setOpen={setOpen}
                   />

@@ -47,6 +47,7 @@ const ComicForm = ({ isOpen, toggleForm }) => {
       updateComic(comic);
     }
     clearCurrent();
+    toggleForm();
   };
 
   const handleDelete = (e) => {
