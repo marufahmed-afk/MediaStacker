@@ -5,28 +5,38 @@ import Home from "./components/pages/Home";
 import Comics from "./components/comics/Comics";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Alert from "./components/layout/Alert";
 
 import ComicState from "./context/comic/ComicState";
 import "./App.css";
 import AuthState from "./context/auth/AuthState";
+import AlertState from "./context/alert/AlertState";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   return (
     <AuthState>
       <ComicState>
-        <Router>
-          <Fragment>
-            <Navbar />
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/comics" component={Comics} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-              </Switch>
-            </div>
-          </Fragment>
-        </Router>
+        <AlertState>
+          <Router>
+            <Fragment>
+              <Navbar />
+              <div className="container">
+                <Alert />
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/comics" component={Comics} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
+                </Switch>
+              </div>
+            </Fragment>
+          </Router>
+        </AlertState>
       </ComicState>
     </AuthState>
   );
