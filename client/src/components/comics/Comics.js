@@ -1,13 +1,21 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import AuthContext from "../../context/auth/authContext";
 import ComicContext from "../../context/comic/comicContext";
 import ComicItem from "./ComicItem";
 import ComicForm from "./ComicForm";
 import ComicFilter from "./ComicFilter";
 
 const Comics = () => {
+  const authContext = useContext(AuthContext);
   const comicContext = useContext(ComicContext);
 
-  const { comics, filtered } = comicContext;
+  const { getComics, comics, filtered } = comicContext;
+
+  useEffect(() => {
+    authContext.loadUser();
+    getComics();
+    // eslint-disable-next-line
+  }, []);
 
   const [isOpen, setOpen] = useState(false);
   const toggleForm = () => {

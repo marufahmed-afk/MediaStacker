@@ -1,58 +1,81 @@
 import React, { useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import ComicContext from "./comicContext";
 import comicReducer from "./comicReducer";
 import {
   ADD_COMIC,
   DELETE_COMIC,
+  GET_COMICS,
   UPDATE_COMIC,
   SET_CURRENT,
   CLEAR_CURRENT,
   FILTER_MEDIA,
   CLEAR_FILTER,
+  COMIC_ERROR,
 } from "../types";
 
 const ComicState = (props) => {
   const initialState = {
-    comics: [
-      {
-        id: 1,
-        name: "Flashpoint Paradox",
-        url: "flashpoint.com",
-        read: false,
-      },
-      {
-        id: 2,
-        name: "Catwoman paradox",
-        url: "catwoman.com",
-        read: true,
-      },
-      {
-        id: 3,
-        name: "Dark Knight Returns",
-        url: "batman.com",
-        read: true,
-      },
-      {
-        id: 4,
-        name: "Superman Red Son",
-        url: "superman.com",
-        read: false,
-      },
-    ],
+    comics: [],
     current: null,
   };
 
   const [state, dispatch] = useReducer(comicReducer, initialState);
 
+  // Get Comics
+  const getComics = async () => {
+    try {
+      const res = await axios.get("/api/media/comics/");
+
+      dispatch({
+        type: GET_COMICS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: COMIC_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
+
   //Add Comic
-  const addComic = (comic) => {
-    comic.id = uuidv4();
-    dispatch({ type: ADD_COMIC, payload: comic });
+  const addComic = async (comic) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post("/api/media/comics/", comic, config);
+
+      dispatch({
+        type: ADD_COMIC,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: COMIC_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
   //Delete Comic
-  const deleteComic = (id) => {
-    dispatch({ type: DELETE_COMIC, payload: id });
+  const deleteComic = async (id) => {
+    try {
+      await axios.delete(`/api/media/comics/${id}`);
+
+      dispatch({
+        type: DELETE_COMIC,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: COMIC_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
   //Set Current Comic
@@ -66,8 +89,30 @@ const ComicState = (props) => {
   };
 
   //Update Comic
-  const updateComic = (comic) => {
-    dispatch({ type: UPDATE_COMIC, payload: comic });
+  const updateComic = async (comic) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/media/comics/${comic._id}`,
+        comic,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_COMIC,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: COMIC_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
   //Filter Comic
@@ -87,6 +132,7 @@ const ComicState = (props) => {
         current: state.current,
         filtered: state.filtered,
         addComic,
+        getComics,
         deleteComic,
         updateComic,
         setCurrent,

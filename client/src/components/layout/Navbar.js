@@ -13,6 +13,10 @@ const Navbar = ({ title }) => {
     setOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   const authLinks = (
     <Fragment>
       <li>Hello {user && user.name}</li>
@@ -26,7 +30,7 @@ const Navbar = ({ title }) => {
       </li>
 
       <li>
-        <a href="#" className="logout">
+        <a href="#" className="logout" onClick={handleLogout}>
           Logout
         </a>
       </li>

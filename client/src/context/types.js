@@ -1,4 +1,6 @@
 export const ADD_COMIC = "ADD_COMIC";
+export const COMIC_ERROR = "COMIC_ERROR";
+export const GET_COMICS = "GET_COMICS";
 export const DELETE_COMIC = "DELETE_COMIC";
 export const UPDATE_COMIC = "UPDATE_COMIC";
 export const SET_CURRENT = "SET_CURRENT";
