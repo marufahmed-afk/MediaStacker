@@ -159,6 +159,41 @@ body {
   right: 30%;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 25px;
+}
+
+.auth-form label {
+  margin-top: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  padding: 10px 10px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  margin: 8px 0 8px 0;
+}
+
+.form-btn {
+  background-color: #2196f3;
+  padding: 8px 30px;
+  margin-top: 25px;
+  color: white;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+}
+
 .add-form form {
   display: flex;
   flex-direction: column;
