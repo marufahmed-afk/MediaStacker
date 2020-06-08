@@ -19,7 +19,7 @@ const Navbar = ({ title }) => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name}</li>
+      <li className="user-greet">Hello {user && user.name}</li>
 
       <li>
         <Link to="#"> Collection </Link>
