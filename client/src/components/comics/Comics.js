@@ -19,7 +19,7 @@ const Comics = () => {
 
   const [isOpen, setOpen] = useState(false);
   const toggleForm = () => {
-    console.log("hello there");
+    console.log("hello");
     setOpen(!isOpen);
   };
 
