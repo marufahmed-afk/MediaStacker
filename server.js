@@ -20,7 +20,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`hello port ${PORT}`);
 });
-
-app.get("/", (req, res) => {
-  res.send("samira modon");
-});
