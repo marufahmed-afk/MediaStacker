@@ -13,6 +13,7 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
   try {
+    //we use user.id because JWT token object has id not _id like mongo which we do in the middleware "auth.js"
     const comics = await Comic.find({ user: req.user.id }).sort({ date: -1 });
     res.json(comics);
   } catch (err) {
