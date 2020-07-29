@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useContext, useEffect } from "react";
-import ComicContext from "../../context/comic/comicContext";
+import React, { Fragment, useState, useContext, useEffect } from 'react';
+import ComicContext from '../../context/comic/comicContext';
 
 const ComicForm = ({ isOpen, toggleForm }) => {
   const comicContext = useContext(ComicContext);
@@ -17,20 +17,20 @@ const ComicForm = ({ isOpen, toggleForm }) => {
       setComic(current);
     } else {
       setComic({
-        name: "",
-        url: "",
+        name: '',
+        url: '',
         read: false,
       });
     }
   }, [comicContext, current]);
 
   const [comic, setComic] = useState({
-    name: "",
-    url: "",
+    name: '',
+    url: '',
     read: false,
   });
 
-  const { id, name, url, read } = comic;
+  const { _id, name, url, read } = comic;
 
   const handleChange = (e) =>
     setComic({ ...comic, [e.target.name]: e.target.value });
@@ -51,7 +51,7 @@ const ComicForm = ({ isOpen, toggleForm }) => {
   };
 
   const handleDelete = (e) => {
-    deleteComic(id);
+    deleteComic(_id);
     clearCurrent();
   };
 
@@ -62,35 +62,35 @@ const ComicForm = ({ isOpen, toggleForm }) => {
 
   return (
     <Fragment>
-      <div className={`add-form ${isOpen ? " toggle-form " : " "}`}>
+      <div className={`add-form ${isOpen ? ' toggle-form ' : ' '}`}>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Title</label>
-          <input type="text" name="name" value={name} onChange={handleChange} />
-          <label htmlFor="url">URL</label>
-          <input type="text" name="url" value={url} onChange={handleChange} />
-          <label className="completed-div">
+          <label htmlFor='name'>Title</label>
+          <input type='text' name='name' value={name} onChange={handleChange} />
+          <label htmlFor='url'>URL</label>
+          <input type='text' name='url' value={url} onChange={handleChange} />
+          <label className='completed-div'>
             Completed
             <input
-              type="checkbox"
-              name="read"
+              type='checkbox'
+              name='read'
               value={read}
               checked={read}
               onChange={handleCheck}
             />
-            <span className="checkmark"></span>
+            <span className='checkmark'></span>
           </label>
 
-          <div className="submit-btns">
+          <div className='submit-btns'>
             <input
-              type="submit"
-              value={current ? "Edit" : "Add"}
-              className="add-form-btn"
+              type='submit'
+              value={current ? 'Edit' : 'Add'}
+              className='add-form-btn'
             />
             {current && (
               <input
-                type="submit"
-                value="Delete"
-                className="delete-form-btn"
+                type='submit'
+                value='Delete'
+                className='delete-form-btn'
                 onClick={handleDelete}
               />
             )}
@@ -98,9 +98,9 @@ const ComicForm = ({ isOpen, toggleForm }) => {
         </form>
 
         <img
-          src={require("../../images/close-btn.svg")}
-          alt=""
-          className="close-btn"
+          src={require('../../images/close-btn.svg')}
+          alt=''
+          className='close-btn'
           onClick={() => {
             toggleForm();
             //calling clearcurrent to switch from edit form to add form
@@ -110,9 +110,9 @@ const ComicForm = ({ isOpen, toggleForm }) => {
       </div>
 
       <img
-        src={require("../../images/add-btn.svg")}
-        alt=""
-        className="add-btn"
+        src={require('../../images/add-btn.svg')}
+        alt=''
+        className='add-btn'
         onClick={() => {
           toggleForm();
           //calling clearcurrent to switch from edit form to add form

@@ -7,7 +7,7 @@ import {
   FILTER_MEDIA,
   CLEAR_FILTER,
   GET_COMICS,
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -26,7 +26,7 @@ export default (state, action) => {
     case DELETE_COMIC:
       return {
         ...state,
-        comics: state.comics.filter((comic) => comic.id !== action.payload),
+        comics: state.comics.filter((comic) => comic._id !== action.payload),
       };
     case GET_COMICS:
       return {
@@ -47,7 +47,7 @@ export default (state, action) => {
       return {
         ...state,
         filtered: state.comics.filter((comic) => {
-          const regex = new RegExp(`${action.payload}`, "gi");
+          const regex = new RegExp(`${action.payload}`, 'gi');
           return comic.name.match(regex);
         }),
       };

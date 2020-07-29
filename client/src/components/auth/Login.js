@@ -33,7 +33,7 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === '' || password === '') {
-      setAlert;
+      //setAlert();
     } else {
       login(user);
     }
