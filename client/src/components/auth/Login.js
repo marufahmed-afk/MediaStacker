@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/auth/authContext";
-import AlertContext from "../../context/alert/alertContext";
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
@@ -11,19 +11,19 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push("/");
+      props.history.push('/');
     }
 
-    if (error === "Invalid Credentials") {
-      setAlert(error, "danger");
+    if (error === 'Invalid Credentials') {
+      setAlert(error, 'danger');
       clearErrors();
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const { email, password } = user;
@@ -32,44 +32,44 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
-      setAlert("Pleaser fill in all fields", "danger");
+    if (email === '' || password === '') {
+      setAlert;
     } else {
       login(user);
     }
   };
 
   return (
-    <div className="form-container">
+    <div className='form-container'>
       <h1>
-        Account <span className="text-primary">Login</span>
+        Account <span className='text-primary'>Login</span>
       </h1>
-      <form className="auth-form" onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
+      <form className='auth-form' onSubmit={onSubmit}>
+        <div className='form-group'>
+          <label htmlFor='email'>Email Address</label>
           <input
-            className="form-field"
-            id="email"
-            type="email"
-            name="email"
+            className='form-field'
+            id='email'
+            type='email'
+            name='email'
             value={email}
             onChange={onChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        <div className='form-group'>
+          <label htmlFor='password'>Password</label>
           <input
-            className="form-field"
-            id="password"
-            type="password"
-            name="password"
+            className='form-field'
+            id='password'
+            type='password'
+            name='password'
             value={password}
             onChange={onChange}
             required
           />
         </div>
-        <input type="submit" value="Login" className="form-btn" />
+        <input type='submit' value='Login' className='form-btn' />
       </form>
     </div>
   );
